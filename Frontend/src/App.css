@@ -1,0 +1,61 @@
+
+
+.App{
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  color: white;
+  background-color: #222;
+}
+.App  > div{
+  display: flex;
+  flex-direction: column;
+  
+}
+.left-cont{
+  justify-content: space-around;
+  width: 50%;
+  align-items: center;
+  height: 100%;
+}
+.right-cont{
+  justify-content: space-around;
+  align-items: center;
+  width: 50%;
+}
+
+.param{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.user-image{
+   height: 600px;
+   width: 600px;
+   /* overflow: scroll; */
+}
+
+
+.user-image{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main-image{
+  max-height: 500px;
+   max-width: 600px;
+   
+}
+
+
+
+
+.feature-cards{
+  display: grid;
+  width: 100vw;
+  justify-items: center;
+  grid-template-columns: repeat(auto-fit,minmax(10rem,1fr));
+
+}
