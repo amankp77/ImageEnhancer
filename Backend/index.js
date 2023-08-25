@@ -15,7 +15,7 @@ const imagekit = new ImageKit({
   privateKey: process.env.API_PRIVATE_KEY
 });
 
-
+console.log()
 
 
 
