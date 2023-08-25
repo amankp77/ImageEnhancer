@@ -1,15 +1,16 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import "./App.css";
 import { IKImage, IKContext, IKUpload } from "imagekitio-react";
 import "bootstrap/dist/css/bootstrap.min.css";
-
-
-
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowRotateRight } from '@fortawesome/free-solid-svg-icons'
+import { faArrowRotateLeft } from '@fortawesome/free-solid-svg-icons'
 
 const urlEndpoint = "https://ik.imagekit.io/garvit001/";
 const publicKey = "public_PMphjT39UrcDsKGdMfvKvOz2iNs=";
 const authenticationEndpoint = "http://localhost:3001/auth";
+
+
 
 function EditImage() {
   const [url, setUrl] = useState("");
@@ -17,9 +18,37 @@ function EditImage() {
   const [height, setheight] = useState(0);
   const [startingHeight, setStartingHeight] = useState(0);
   const [startingWidth, setStartingWidth] = useState(0);
-  const [brightness,setBrightness] = useState("brightness(100%)");
-  const [grayscal,setGrayScale] = useState("grayscale(0%)");
+  const [blur, setBlur] = useState("0");
+  const [contrast,setContrast] = useState("");
+  const [grayscale,setGrayscale] = useState("");
+  const [borderThickness,setBorderThickness] = useState(0)
+  const [borderColor,setBorderColor] = useState("FFFFFF");
+  const [sharpen,setSharpen] = useState('0')
+  const [rotate,setRotate] = useState(0);
+  
+  
+  
+  
+  useEffect(() => {
+    // This code will run after the component is mounted
 
+    const download = document.querySelector('.myanc');
+
+    if (download) {
+      download.addEventListener('click', () => {
+       
+        const imgname = "image.webp";
+        
+        const anchor = document.createElement('a');
+        anchor.href = url;
+        anchor.download = imgname;
+        anchor.click();
+      });
+    }
+  }
+  )
+  
+  
   const onError = (err) => {
     console.log("Error", err);
   };
@@ -31,24 +60,63 @@ function EditImage() {
     setStartingHeight(res.height);
     setStartingWidth(res.width);
   };
+  
 
-  const heightHandler = (e) => {
-    let fact = e.target.value;
-    setheight((startingHeight / 100) * fact);
-  };
-  const widthHandler = (e) => {
-    let fact = e.target.value;
-    setwidth((startingWidth / 100) * fact);
+  const BlurHandler = (e) => {
+    let blurValue = e.target.value;
+    setBlur(`${blurValue}`);
   };
 
-  const BrightnessHandler = (e) => {
-     let brightnessValue = e.target.value;
-     setBrightness(`brightness(${brightnessValue}%)`);
-  }
+
+  const SharpenHandler = (e) => {
+    let sharpValue = e.target.value;
+    setSharpen(`${sharpValue}`);
+   
+  };
   const GrayscaleHandler = (e) => {
-     let grayscaleValue = e.target.value;
-     setGrayScale(`grayscale(${grayscaleValue}%)`);
+    if(e.target.checked)
+    setGrayscale(`grayscale`);
+    else
+    setGrayscale('')
+  // console.log(e.target)
+  };
+
+
+  const ContrastHandler = (e) => {
+    if(e.target.checked)
+    setContrast(`contrast`);
+    else
+    setContrast('')
+  };
+
+  const BorderColorHandler = (e) =>{
+    
+      let newColor = e.target.value.toUpperCase().slice(1);
+      setBorderColor(newColor);
+
   }
+  const BorderThickHandler = (e) =>{
+      
+      let thick = e.target.value
+      setBorderThickness(thick)
+
+  }
+
+  const rotateLeftHandler = ()=>{
+    let ov = rotate;
+    ov = ov + 270;
+    ov %= 360;
+    setRotate(ov);
+  }
+
+  const rotateRightHandler = ()=>{
+    let ov = rotate 
+    ov = ov + 90;
+    ov %= 360;
+    setRotate(ov);
+  }
+
+
 
   return (
     <div className="App">
@@ -60,20 +128,25 @@ function EditImage() {
         >
           <h2>Your Image</h2>
           <div className="user-image">
-          {height == 0 ? (
-             <img src="https://placehold.co/600x600?text=Your+Image" alt="placholder-image" />
-          ) : (
-            <IKImage path={url + `?tr=h-${height}`} className="main-image" style={
-              {
-                'filter' : [brightness,grayscal].join(' '),
-
+          {/* <a id="download" className="myanc" href={url} download>Download Image</a> */}
+            {height == 0 ? (
+              <img
+                src="https://placehold.co/600x600?text=Your+Image"
+                alt="placholder-image"
+              />
+            ) : (
+              <IKImage
+                path={url + 
+                `?tr=bl-${blur},e-${grayscale},e-${contrast},e-sharpen-${sharpen},b-${borderThickness}_${borderColor},rt-${rotate}`
                 }
-              }/>
-          )}
+                className="main-image"
+              />
+            )}
           </div>
 
           {/* Upload Image */}
           <div className="upload-cont">
+          
             <IKUpload
               style={{
                 backgroundColor: "green",
@@ -87,22 +160,13 @@ function EditImage() {
         </IKContext>
       </div>
       <div className="right-cont">
-        <div className="resize-param param">
-          <h2>Resize Your Image</h2>
-          <div className="input">
-            <span>Width or Height : </span>
-            <input
-              type="range"
-              id="width"
-              name="width"
-              min="0"
-              max="200"
-              onChange={heightHandler}
-            />
-          </div>
-        </div>
-        <div className="brightness-param param">
-          <h2>Birghtness </h2>
+
+      <div className="rotate-cont">
+      <FontAwesomeIcon  icon={faArrowRotateLeft} onClick={rotateLeftHandler}/>
+      <FontAwesomeIcon icon={faArrowRotateRight} onClick={rotateRightHandler}/>
+</div>
+        <div className="blur-param param">
+          <h2>Blur </h2>
           <div className="input">
             <span>Value : </span>
             <input
@@ -111,13 +175,15 @@ function EditImage() {
               name="width"
               min="0"
               max="100"
-              onChange={BrightnessHandler}
+              defaultValue="0"
+              onChange={BlurHandler}
             />
           </div>
         </div>
 
-        <div className="grayscale-param param">
-          <h2 >Grayscale </h2>
+
+        <div className="sharpen-param param">
+          <h2>Sharpen </h2>
           <div className="input">
             <span>Value : </span>
             <input
@@ -126,13 +192,31 @@ function EditImage() {
               name="width"
               min="0"
               max="100"
-              onChange={GrayscaleHandler}
+              defaultValue="0"
+              onChange={SharpenHandler}
             />
           </div>
         </div>
-      
-      
-      
+
+        <div className="grayscale-param">
+          <h2>Grayscale </h2>
+
+          <input type="checkbox" defaultValue={false} onChange={GrayscaleHandler} />
+        </div>
+
+
+        <div className="Contrast-param">
+          <h2>Contrast </h2>
+
+          <input type="checkbox" defaultValue={false} onChange={ContrastHandler} />
+        </div>
+
+        <div className="border-param">
+          <h2>Border </h2>
+
+          <input type="color" onChange={BorderColorHandler} />
+          <input type="number" min='1' max='35' defaultValue='0' onChange={BorderThickHandler} />
+        </div>
       </div>
     </div>
   );

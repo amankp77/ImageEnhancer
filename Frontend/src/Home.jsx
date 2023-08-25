@@ -30,6 +30,10 @@ const Home = () => {
       </Card.Body>
     </Card>
 
+
+      <Link to="/resize">Resize</Link>
+      <Link to="/aitags">AiTags</Link>
+
     </div>
     </div>
   )

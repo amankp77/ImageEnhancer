@@ -31,6 +31,16 @@
   width: 100%;
 }
 
+.grayscale-param{
+  display: flex;
+  width: 30%;
+  justify-content: space-around;
+}
+
+.allTagsCont{
+  display: flex;
+  flex-direction: column;
+}
 .user-image{
    height: 600px;
    width: 600px;
