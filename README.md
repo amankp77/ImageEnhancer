@@ -10,6 +10,7 @@ This project demonstrates the integration of React.js with ImageKit.io to effici
 - Improved website performance with optimized images.
 - Easy setup and configuration for quick deployment.
 - AI-generated tags for your image.
+- Convert the image type as per your choice.
 
 # Getting Started
 Follow these steps to get the project up and running:

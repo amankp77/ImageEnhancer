@@ -4,7 +4,6 @@ import { IKImage, IKContext, IKUpload } from "imagekitio-react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRotateRight } from "@fortawesome/free-solid-svg-icons";
 import { faArrowRotateLeft } from "@fortawesome/free-solid-svg-icons";
@@ -26,12 +25,9 @@ function EditImage() {
   const [borderColor, setBorderColor] = useState("FFFFFF");
   const [sharpen, setSharpen] = useState("0");
   const [rotate, setRotate] = useState(0);
-  const [quality, setQuality] = useState(100);
   const [reset, setReset] = useState(0);
   const [round, setRound] = useState(0);
 
-
-  
   const onError = (err) => {
     console.log("Error", err);
   };
@@ -57,11 +53,6 @@ function EditImage() {
     if (e.target.checked) setGrayscale(`grayscale`);
     else setGrayscale("");
     // console.log(e.target)
-  };
-
-  const qualityHandler = (e) => {
-    let qualityValue = e.target.value;
-    setQuality(`${qualityValue}`);
   };
 
   const ContrastHandler = (e) => {
@@ -103,7 +94,6 @@ function EditImage() {
     setRound(corner);
   };
 
-  
   return (
     <div className="App">
       <div className="left-cont">
@@ -114,7 +104,6 @@ function EditImage() {
         >
           <h2>Your Image</h2>
           <div className="user-image">
-           
             {height == 0 ? (
               <img
                 src="https://placehold.co/600x600?text=Your+Image"
@@ -124,44 +113,47 @@ function EditImage() {
               <IKImage
                 path={
                   url +
-                  `?tr=bl-${blur},e-${grayscale},q-${quality},e-${contrast},e-sharpen-${sharpen},b-${borderThickness}_${borderColor},rt-${rotate},r-${round},orig-${reset},ik-attachment=true`
+                  `?tr=bl-${blur},e-${grayscale},e-${contrast},e-sharpen-${sharpen},b-${borderThickness}_${borderColor},rt-${rotate},r-${round},orig-${reset},ik-attachment=true`
                 }
                 className="main-image"
               />
             )}
           </div>
           <div className="download-upload-cont">
-          <Button className="primary" href={urlEndpoint +url +
-                  `?ik-attachment=true&tr=bl-${blur},e-${grayscale},q-${quality},e-${contrast},e-sharpen-${sharpen},b-${borderThickness}_${borderColor},rt-${rotate},r-${round},orig-${reset},f-png`}>Download</Button>
+            <Button
+              className="primary"
+              href={
+                urlEndpoint +
+                url +
+                `?ik-attachment=true&tr=bl-${blur},e-${grayscale},e-${contrast},e-sharpen-${sharpen},b-${borderThickness}_${borderColor},rt-${rotate},r-${round},orig-${reset},f-png`
+              }
+            >
+              Download
+            </Button>
 
-          {/* Upload Image */}
-          <div className="upload-cont">
-            <IKUpload
-              style={{
-                backgroundColor: "green",
-                fontSize: "1rem",
-              }}
-              fileName="test-upload.png"
-              onError={onError}
-              onSuccess={onSuccess}
-            />
-          </div>
+            {/* Upload Image */}
+            <div className="upload-cont">
+              <IKUpload
+                style={{
+                  backgroundColor: "green",
+                  fontSize: "1rem",
+                }}
+                fileName="test-upload.png"
+                onError={onError}
+                onSuccess={onSuccess}
+              />
+            </div>
           </div>
         </IKContext>
       </div>
       <div className="right-cont">
         <div className="rotate-cont">
           <h3>Rotate Image</h3>
-          <button className="button"  onClick={rotateLeftHandler}>
-          <FontAwesomeIcon
-            className="lRotate"
-            icon={faArrowRotateLeft}
-          />
+          <button className="button" onClick={rotateLeftHandler}>
+            <FontAwesomeIcon className="lRotate" icon={faArrowRotateLeft} />
           </button>
           <button className="button" onClick={rotateRightHandler}>
-          <FontAwesomeIcon
-            icon={faArrowRotateRight}
-          />
+            <FontAwesomeIcon icon={faArrowRotateRight} />
           </button>
         </div>
         <div className="blur-param param">
@@ -192,21 +184,6 @@ function EditImage() {
               max="100"
               defaultValue="0"
               onChange={SharpenHandler}
-            />
-          </div>
-        </div>
-        <div className="blur-param param">
-          <h2>Quality </h2>
-          <div className="input">
-            <span>Value : </span>
-            <input
-              type="range"
-              id="width"
-              name="width"
-              min="0"
-              max="100"
-              defaultValue="100"
-              onChange={qualityHandler}
             />
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import { IKImage, IKContext, IKUpload } from "imagekitio-react";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -8,13 +8,13 @@ const urlEndpoint = "https://ik.imagekit.io/garvit001/";
 const publicKey = "public_PMphjT39UrcDsKGdMfvKvOz2iNs=";
 const authenticationEndpoint = "http://localhost:3001/auth";
 
-function EditImage() {
+function ImageFormat() {
   const [url, setUrl] = useState("");
   const [width, setwidth] = useState(0);
   const [height, setheight] = useState(0);
   const [startingHeight, setStartingHeight] = useState(0);
   const [startingWidth, setStartingWidth] = useState(0);
-  const [quality, setQuality] = useState(100);
+  const [format, setFormat] = useState("jpg");
 
   const onError = (err) => {
     console.log("Error", err);
@@ -28,16 +28,11 @@ function EditImage() {
     setStartingWidth(res.width);
   };
 
-  const heightHandler = (e) => {
-    let fact = e.target.value;
-    setheight((startingHeight / 100) * fact);
+  const formatHandler = (e) => {
+    let format = e.target.value;
+    console.log(format);
+    setFormat(format);
   };
-
-  const qualityHandler = (e) => {
-    let qualityValue = e.target.value;
-    setQuality(`${qualityValue}`);
-  };
-
   return (
     <div className="App">
       <div className="left-cont">
@@ -54,22 +49,13 @@ function EditImage() {
                 alt="placholder-image"
               />
             ) : (
-              <IKImage
-                path={url + `?tr=h-${height},q-${quality}`}
-                className="main-image"
-              />
+              <IKImage path={url + `?tr=f-${format}`} className="main-image" />
             )}
           </div>
-
-          {/* Upload Image */}
           <div className="download-upload-cont">
             <Button
               className="primary"
-              href={
-                urlEndpoint +
-                url +
-                `?ik-attachment=true&tr=h-${height},q-${quality},f-png`
-              }
+              href={urlEndpoint + url + `?ik-attachment=true&tr=f-${format}`}
             >
               Download
             </Button>
@@ -90,39 +76,19 @@ function EditImage() {
         </IKContext>
       </div>
       <div className="right-cont">
-        <div className="resize-param param">
-          <h2>Resize Your Image</h2>
-          <div className="input">
-            <span>Width or Height : </span>
-            <input
-              type="range"
-              id="width"
-              name="width"
-              min="0"
-              max="200"
-              onChange={heightHandler}
-            />
-          </div>
-        </div>
-
-        <div className="blur-param param">
-          <h2>Quality </h2>
-          <div className="input">
-            <span>Value : </span>
-            <input
-              type="range"
-              id="width"
-              name="width"
-              min="0"
-              max="100"
-              defaultValue="100"
-              onChange={qualityHandler}
-            />
-          </div>
+        <div style={{ color: "white" }}>
+          <h3>Choose the File format</h3>
+          <select name="format" id="format" onClick={formatHandler}>
+            <option value="jpg">To Jpg</option>
+            <option value="png">To PNG</option>
+            <option value="jpeg">To JPEG</option>
+            <option value="webp">To Webd</option>
+            <option value="aeif">To Avif</option>
+          </select>
         </div>
       </div>
     </div>
   );
 }
 
-export default EditImage;
+export default ImageFormat;

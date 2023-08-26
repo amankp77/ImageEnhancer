@@ -4,6 +4,7 @@ import EditImage from "./EditImage";
 import Home from "./Home";
 import Resize from "./Resize";
 import AITags from "./AITags";
+import ImageFormat from "./ImageFormat";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
           <Route path="edit_image" element={<EditImage />} />
           <Route path="resize" element={<Resize />} />
           <Route path="aitags" element={<AITags />} />
+          <Route path="format" element={<ImageFormat />} />
         </Routes>
       </div>
     </Router>

@@ -69,15 +69,28 @@
 }
 
 .feature-cards{
-  display: grid;
+  /* display: grid;
   justify-items: center;
   padding: 5rem;
   grid-template-columns: repeat(auto-fit,minmax(10rem,1fr));
   
   grid-gap: 150px;
   background-color: #242424;
-  margin: auto;
+  margin: auto; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 4rem;
+  
+  
 }
+
+.feature-cards > div{ 
+   margin-right: 7rem;
+   margin-bottom: 2rem;
+}
+
+
 
 
 .rotate-cont{
@@ -119,4 +132,5 @@
   background-color: #242424;
   margin: 3rem 0rem 2rem 0rem;
   color: whitesmoke;
+  
 }

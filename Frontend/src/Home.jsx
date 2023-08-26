@@ -12,6 +12,7 @@ const Home = () => {
             width: "18rem",
             backgroundColor: "rgb(49 48 48)",
             color: "white",
+           
           }}
         >
           <Card.Img
@@ -60,10 +61,34 @@ const Home = () => {
         >
           <Card.Img
             variant="top"
+            src="https://cdn-icons-png.flaticon.com/512/1322/1322164.png"
+            style={{ height: "280px" }}
+          />
+          <Card.Body>
+            <Card.Title>Image Format Converter</Card.Title>
+            <Card.Text>
+              Transforming Image Formats: Effortlessly Convert Images to Your
+              Preferred Format
+            </Card.Text>
+            <Link to="/format">
+              <Button variant="primary">Format Converter</Button>
+            </Link>
+          </Card.Body>
+        </Card>
+
+        <Card
+          style={{
+            width: "18rem",
+            backgroundColor: "rgb(49 48 48)",
+            color: "white",
+          }}
+        >
+          <Card.Img
+            variant="top"
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSttiy6_waCaNsbsH4ahOqf0O2z-gUfWXFxzg&usqp=CAU"
           />
           <Card.Body>
-            <Card.Title>Resize Image</Card.Title>
+            <Card.Title>Resize and Compress</Card.Title>
             <Card.Text>
               Effortlessly optimize images with automatic resizing for faster
               loading and improved performance.
