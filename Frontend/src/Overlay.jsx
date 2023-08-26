@@ -15,13 +15,13 @@ function Overlay() {
   const [startingHeight, setStartingHeight] = useState(0);
   const [startingWidth, setStartingWidth] = useState(0);
   const [format, setFormat] = useState("");
-  const [overlayText, setoverlayText] = useState(" ")
-  const [overlayBackground, setoverlayBackground] = useState("FFFFFF")
-  const [overlayTextSize, setoverlayTextSize] = useState(60)
-  const [overlayPadding, setOverlayPadding] = useState(10)
-  const [isBackground, setisBackground] = useState(true)
-  const [tempBackgroundHolder, settempBackgroundHolder] = useState("")
-  const [textColor, setTextColor] = useState("000000")
+  const [overlayText, setoverlayText] = useState(" ");
+  const [overlayBackground, setoverlayBackground] = useState("FFFFFF");
+  const [overlayTextSize, setoverlayTextSize] = useState(60);
+  const [overlayPadding, setOverlayPadding] = useState(10);
+  const [isBackground, setisBackground] = useState(true);
+  const [tempBackgroundHolder, settempBackgroundHolder] = useState("");
+  const [textColor, setTextColor] = useState("000000");
 
   const onError = (err) => {
     console.log("Error", err);
@@ -41,40 +41,36 @@ function Overlay() {
     setFormat(format);
   };
 
-  const overlayTextHandler = (e) =>{
-        if(e.target.value!="")
-        setoverlayText(encodeURI(e.target.value));
-        else
-        setoverlayText(encodeURI(" "));
-  }
+  const overlayTextHandler = (e) => {
+    if (e.target.value != "") setoverlayText(encodeURI(e.target.value));
+    else setoverlayText(encodeURI(" "));
+  };
 
-  const overlayBackgroundHandler = (e) =>{
+  const overlayBackgroundHandler = (e) => {
     setoverlayBackground(e.target.value.toUpperCase().slice(1));
-
-  }
+  };
 
   const overlayTextSizeHandler = (e) => {
-        setoverlayTextSize(e.target.value)
-  }
+    setoverlayTextSize(e.target.value);
+  };
 
   const overlayPaddingHandler = (e) => {
-        setOverlayPadding(e.target.value);
-  }
+    setOverlayPadding(e.target.value);
+  };
 
   const backgroundExistenseHandler = (e) => {
-       if(e.target.checked){
-        settempBackgroundHolder(overlayBackground)
-        setoverlayBackground("transperent")
-       }
-       else{
-        setoverlayBackground(tempBackgroundHolder)
-       }
-  }
+    if (e.target.checked) {
+      settempBackgroundHolder(overlayBackground);
+      setoverlayBackground("transperent");
+    } else {
+      setoverlayBackground(tempBackgroundHolder);
+    }
+  };
 
   const textColorHandler = (e) => {
     setTextColor(e.target.value.toUpperCase().slice(1));
-    console.log(textColor)
-  }
+    console.log(textColor);
+  };
   return (
     <div className="App">
       <div className="left-cont">
@@ -91,7 +87,13 @@ function Overlay() {
                 alt="placholder-image"
               />
             ) : (
-              <IKImage path={url + `?tr=l-text,i-${overlayText},fs-${overlayTextSize},bg-${overlayBackground},pa-${overlayPadding},co-${textColor},l-end`} className="main-image" />
+              <IKImage
+                path={
+                  url +
+                  `?tr=l-text,i-${overlayText},fs-${overlayTextSize},bg-${overlayBackground},pa-${overlayPadding},co-${textColor},l-end`
+                }
+                className="main-image"
+              />
             )}
           </div>
           <div className="download-upload-cont">
@@ -118,14 +120,49 @@ function Overlay() {
         </IKContext>
       </div>
       <div className="right-cont">
-        <div style={{ color: "white" }}>
-          <h3>Overlay Text</h3>
-           <input type="text" onChange={overlayTextHandler} />
-           <input type="color" defaultValue="#FFFFFF" onChange={overlayBackgroundHandler} />
-           <input type="number" min="0" max="250" onChange={overlayTextSizeHandler} />
-           <input type="number" min="0" max="100" onChange={overlayPaddingHandler} />
-           <input type="checkbox" onChange={backgroundExistenseHandler} />
-           <input type="color" defaultValue="000000" onChange={textColorHandler} />
+        <div className="feature-cards">
+          <div>
+            <h3>Overlay Text</h3>
+            <input type="text" onChange={overlayTextHandler} />
+          </div>
+          <div className="overlay-feature param">
+            <h3>Background Color</h3>
+            <input
+              type="color"
+              defaultValue="#FFFFFF"
+              onChange={overlayBackgroundHandler}
+            />
+          </div>
+          <div className="overlay-feature param">
+            <h3>Remove Background Color</h3>
+            <input type="checkbox" onChange={backgroundExistenseHandler} />
+          </div>
+          <div className="overlay-feature param">
+            <h3>Font Color</h3>
+            <input
+              type="color"
+              defaultValue="000000"
+              onChange={textColorHandler}
+            />
+          </div>
+          <div className="overlay-feature param">
+            <h3>Font size</h3>
+            <input
+              type="number"
+              min="0"
+              max="250"
+              onChange={overlayTextSizeHandler}
+            />
+          </div>
+          <div className="overlay-feature param">
+            <h3>Padding</h3>
+            <input
+              type="number"
+              min="0"
+              max="100"
+              onChange={overlayPaddingHandler}
+            />
+          </div>
         </div>
       </div>
     </div>
