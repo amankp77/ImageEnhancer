@@ -39,7 +39,7 @@ function EditImage() {
   };
 
   return (
-    <div className="App">
+    <div className="App App-resize">
       <div className="left-cont">
         <IKContext
           urlEndpoint={urlEndpoint}
@@ -89,7 +89,7 @@ function EditImage() {
           </div>
         </IKContext>
       </div>
-      <div className="right-cont">
+      <div className="right-cont right-cont-resize">
         <div className="resize-param param">
           <h2>Resize Your Image</h2>
           <div className="input">

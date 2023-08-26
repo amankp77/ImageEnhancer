@@ -85,6 +85,13 @@
   
 }
 
+.App-resize{
+  align-items: center;
+}
+
+.right-cont-resize{
+  height: 30%;
+}
 .feature-cards > div{ 
    margin-right: 7rem;
    margin-bottom: 2rem;
