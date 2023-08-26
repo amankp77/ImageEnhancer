@@ -5,9 +5,14 @@ import Card from "react-bootstrap/Card";
 const Home = () => {
   return (
     <div>
+      <h1 className="heading-home">Image Editor and Enhancer</h1>
       <div className="feature-cards">
         <Card
-          style={{ width: "18rem", backgroundColor: "#222", color: "white" }}
+          style={{
+            width: "18rem",
+            backgroundColor: "rgb(49 48 48)",
+            color: "white",
+          }}
         >
           <Card.Img
             variant="top"
@@ -25,7 +30,11 @@ const Home = () => {
         </Card>
 
         <Card
-          style={{ width: "18rem", backgroundColor: "#222", color: "white" }}
+          style={{
+            width: "18rem",
+            backgroundColor: "rgb(49 48 48)",
+            color: "white",
+          }}
         >
           <Card.Img
             variant="top"
@@ -43,7 +52,11 @@ const Home = () => {
         </Card>
 
         <Card
-          style={{ width: "18rem", backgroundColor: "#222", color: "white" }}
+          style={{
+            width: "18rem",
+            backgroundColor: "rgb(49 48 48)",
+            color: "white",
+          }}
         >
           <Card.Img
             variant="top"
@@ -61,20 +74,25 @@ const Home = () => {
           </Card.Body>
         </Card>
         <Card
-          style={{ width: "18rem", backgroundColor: "#222", color: "white" }}
+          style={{
+            width: "18rem",
+            backgroundColor: "rgb(49 48 48)",
+            color: "white",
+          }}
         >
           <Card.Img
             variant="top"
-            src="https://static.thenounproject.com/png/5238891-200.png"
+            src="https://img.freepik.com/free-photo/automatic-recognition-software-analyzing-city-elements_23-2150643791.jpg?size=1626&ext=jpg&ga=GA1.1.650447326.1680780590&semt=sph"
+            style={{ height: "280px" }}
           />
           <Card.Body>
-            <Card.Title>AI Tags</Card.Title>
+            <Card.Title>Image tags</Card.Title>
             <Card.Text>
-              AI-powered image tags for your image,
-              boosting engagement and searchability.
+              AI-powered image tags for your image, boosting engagement and
+              searchability.
             </Card.Text>
             <Link to="/aitags">
-              <Button variant="primary">AI Tags</Button>
+              <Button variant="primary">Image Tags</Button>
             </Link>
           </Card.Body>
         </Card>

@@ -8,7 +8,7 @@ import AITags from "./AITags";
 const App = () => {
   return (
     <Router>
-      <div className="main-app">
+      <div className="main_app">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="crop" element={<Crop />} />

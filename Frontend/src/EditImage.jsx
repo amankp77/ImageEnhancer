@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import { IKImage, IKContext, IKUpload } from "imagekitio-react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Button from "react-bootstrap/Button";
+
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRotateRight } from "@fortawesome/free-solid-svg-icons";
 import { faArrowRotateLeft } from "@fortawesome/free-solid-svg-icons";
@@ -24,23 +27,11 @@ function EditImage() {
   const [sharpen, setSharpen] = useState("0");
   const [rotate, setRotate] = useState(0);
   const [quality, setQuality] = useState(100);
-  useEffect(() => {
-    // This code will run after the component is mounted
+  const [reset, setReset] = useState(0);
+  const [round, setRound] = useState(0);
 
-    const download = document.querySelector(".myanc");
 
-    if (download) {
-      download.addEventListener("click", () => {
-        const imgname = "image.webp";
-
-        const anchor = document.createElement("a");
-        anchor.href = url;
-        anchor.download = imgname;
-        anchor.click();
-      });
-    }
-  });
-
+  
   const onError = (err) => {
     console.log("Error", err);
   };
@@ -101,6 +92,18 @@ function EditImage() {
     setRotate(ov);
   };
 
+  const ResetChanges = (e) => {
+    if (e.target.checked) setReset(true);
+    else setReset(false);
+    // console.log(e.target)
+  };
+
+  const RoundCorderHandler = (e) => {
+    let corner = e.target.value;
+    setRound(corner);
+  };
+
+  
   return (
     <div className="App">
       <div className="left-cont">
@@ -111,7 +114,7 @@ function EditImage() {
         >
           <h2>Your Image</h2>
           <div className="user-image">
-            {/* <a id="download" className="myanc" href={url} download>Download Image</a> */}
+           
             {height == 0 ? (
               <img
                 src="https://placehold.co/600x600?text=Your+Image"
@@ -121,12 +124,15 @@ function EditImage() {
               <IKImage
                 path={
                   url +
-                  `?tr=bl-${blur},e-${grayscale},q-${quality},e-${contrast},e-sharpen-${sharpen},b-${borderThickness}_${borderColor},rt-${rotate}`
+                  `?tr=bl-${blur},e-${grayscale},q-${quality},e-${contrast},e-sharpen-${sharpen},b-${borderThickness}_${borderColor},rt-${rotate},r-${round},orig-${reset},ik-attachment=true`
                 }
                 className="main-image"
               />
             )}
           </div>
+          <div className="download-upload-cont">
+          <Button className="primary" href={urlEndpoint +url +
+                  `?ik-attachment=true&tr=bl-${blur},e-${grayscale},q-${quality},e-${contrast},e-sharpen-${sharpen},b-${borderThickness}_${borderColor},rt-${rotate},r-${round},orig-${reset},f-png`}>Download</Button>
 
           {/* Upload Image */}
           <div className="upload-cont">
@@ -140,20 +146,23 @@ function EditImage() {
               onSuccess={onSuccess}
             />
           </div>
+          </div>
         </IKContext>
       </div>
       <div className="right-cont">
         <div className="rotate-cont">
           <h3>Rotate Image</h3>
+          <button className="button"  onClick={rotateLeftHandler}>
           <FontAwesomeIcon
             className="lRotate"
             icon={faArrowRotateLeft}
-            onClick={rotateLeftHandler}
           />
+          </button>
+          <button className="button" onClick={rotateRightHandler}>
           <FontAwesomeIcon
             icon={faArrowRotateRight}
-            onClick={rotateRightHandler}
           />
+          </button>
         </div>
         <div className="blur-param param">
           <h2>Blur </h2>
@@ -196,8 +205,23 @@ function EditImage() {
               name="width"
               min="0"
               max="100"
-              defaultValue="0"
+              defaultValue="100"
               onChange={qualityHandler}
+            />
+          </div>
+        </div>
+        <div className="round-param param">
+          <h2>Round Corners </h2>
+          <div className="input">
+            <span>Value : </span>
+            <input
+              type="range"
+              id="width"
+              name="width"
+              min="0"
+              max="100"
+              defaultValue="0"
+              onChange={RoundCorderHandler}
             />
           </div>
         </div>
@@ -232,6 +256,11 @@ function EditImage() {
             defaultValue="0"
             onChange={BorderThickHandler}
           />
+        </div>
+        <div className="grayscale-param">
+          <h2>Reset </h2>
+
+          <input type="checkbox" defaultValue={false} onChange={ResetChanges} />
         </div>
       </div>
     </div>

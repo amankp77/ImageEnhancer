@@ -82,10 +82,14 @@ function EditImage() {
         </IKContext>
       </div>
       <div className="right-cont">
-        <h1>Your AI Tags</h1>
+        <h1>Your Image Tags</h1>
         <div className="allTagsCont">
           {allTags.map((tag, index) => (
-            <h3 key={index}>{tag.name}</h3>
+            <ul>
+              <li>
+                <h3 key={index}>{tag.name}</h3>
+              </li>
+            </ul>
           ))}
         </div>
       </div>
