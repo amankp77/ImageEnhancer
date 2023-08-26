@@ -12,12 +12,11 @@ const Home = () => {
             width: "18rem",
             backgroundColor: "rgb(49 48 48)",
             color: "white",
-           
           }}
         >
           <Card.Img
             variant="top"
-            src="https://th.bing.com/th/id/OIP.dq67H_j9l1bS4K3BLNqL6gHaHa?pid=ImgDet&rs=1"
+            src="https://cdn3d.iconscout.com/3d/premium/thumb/crop-tool-7045461-5740256.png?f=webp"
           />
           <Card.Body>
             <Card.Title>Crop Image</Card.Title>
@@ -39,7 +38,7 @@ const Home = () => {
         >
           <Card.Img
             variant="top"
-            src="https://th.bing.com/th/id/OIP.pqAA7eV8PNeB7yDAMewlawHaHa?pid=ImgDet&rs=1"
+            src="https://img.freepik.com/free-psd/3d-cartoon-people-edit-pictures-with-camera-tools_1150-56192.jpg"
           />
           <Card.Body>
             <Card.Title>Edit Image</Card.Title>
@@ -85,7 +84,7 @@ const Home = () => {
         >
           <Card.Img
             variant="top"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSttiy6_waCaNsbsH4ahOqf0O2z-gUfWXFxzg&usqp=CAU"
+            src="https://play-lh.googleusercontent.com/1cf6sZ503u5W_L4OhrJs-ocOqnXJ71NkKi9J4_IM1WtZozPZOns_NVjciC6SvsYykxox=w240-h480-rw"
           />
           <Card.Body>
             <Card.Title>Resize and Compress</Card.Title>
@@ -118,6 +117,30 @@ const Home = () => {
             </Card.Text>
             <Link to="/aitags">
               <Button variant="primary">Image Tags</Button>
+            </Link>
+          </Card.Body>
+        </Card>
+
+        <Card
+          style={{
+            width: "18rem",
+            backgroundColor: "rgb(49 48 48)",
+            color: "white",
+          }}
+        >
+          <Card.Img
+            variant="top"
+            src="https://cdn-icons-png.flaticon.com/512/1825/1825919.png"
+            style={{ height: "280px" }}
+          />
+          <Card.Body>
+            <Card.Title>Meme Editor</Card.Title>
+            <Card.Text>
+              AI-powered image tags for your image, boosting engagement and
+              searchability.
+            </Card.Text>
+            <Link to="/overlay">
+              <Button variant="primary">Overlay</Button>
             </Link>
           </Card.Body>
         </Card>

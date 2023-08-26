@@ -8,14 +8,20 @@ const urlEndpoint = "https://ik.imagekit.io/garvit001/";
 const publicKey = "public_PMphjT39UrcDsKGdMfvKvOz2iNs=";
 const authenticationEndpoint = "http://localhost:3001/auth";
 
-function ImageFormat() {
+function Overlay() {
   const [url, setUrl] = useState("");
   const [width, setwidth] = useState(0);
   const [height, setheight] = useState(0);
   const [startingHeight, setStartingHeight] = useState(0);
   const [startingWidth, setStartingWidth] = useState(0);
   const [format, setFormat] = useState("");
-  const [firstFormat, setFirstFormat] = useState("");
+  const [overlayText, setoverlayText] = useState(" ")
+  const [overlayBackground, setoverlayBackground] = useState("FFFFFF")
+  const [overlayTextSize, setoverlayTextSize] = useState(60)
+  const [overlayPadding, setOverlayPadding] = useState(10)
+  const [isBackground, setisBackground] = useState(true)
+  const [tempBackgroundHolder, settempBackgroundHolder] = useState("")
+  const [textColor, setTextColor] = useState("000000")
 
   const onError = (err) => {
     console.log("Error", err);
@@ -34,6 +40,41 @@ function ImageFormat() {
     let format = e.target.value;
     setFormat(format);
   };
+
+  const overlayTextHandler = (e) =>{
+        if(e.target.value!="")
+        setoverlayText(encodeURI(e.target.value));
+        else
+        setoverlayText(encodeURI(" "));
+  }
+
+  const overlayBackgroundHandler = (e) =>{
+    setoverlayBackground(e.target.value.toUpperCase().slice(1));
+
+  }
+
+  const overlayTextSizeHandler = (e) => {
+        setoverlayTextSize(e.target.value)
+  }
+
+  const overlayPaddingHandler = (e) => {
+        setOverlayPadding(e.target.value);
+  }
+
+  const backgroundExistenseHandler = (e) => {
+       if(e.target.checked){
+        settempBackgroundHolder(overlayBackground)
+        setoverlayBackground("transperent")
+       }
+       else{
+        setoverlayBackground(tempBackgroundHolder)
+       }
+  }
+
+  const textColorHandler = (e) => {
+    setTextColor(e.target.value.toUpperCase().slice(1));
+    console.log(textColor)
+  }
   return (
     <div className="App">
       <div className="left-cont">
@@ -50,7 +91,7 @@ function ImageFormat() {
                 alt="placholder-image"
               />
             ) : (
-              <IKImage path={url + `?tr=f-${format}`} className="main-image" />
+              <IKImage path={url + `?tr=l-text,i-${overlayText},fs-${overlayTextSize},bg-${overlayBackground},pa-${overlayPadding},co-${textColor},l-end`} className="main-image" />
             )}
           </div>
           <div className="download-upload-cont">
@@ -78,19 +119,17 @@ function ImageFormat() {
       </div>
       <div className="right-cont">
         <div style={{ color: "white" }}>
-          <h3>Choose the File format</h3>
-          <select name="format" id="format" onClick={formatHandler}>
-            <option value="">--Please choose an option--</option>
-            <option value="jpg">To Jpg</option>
-            <option value="png">To PNG</option>
-            <option value="jpeg">To JPEG</option>
-            <option value="webp">To Webd</option>
-            <option value="aeif">To Avif</option>
-          </select>
+          <h3>Overlay Text</h3>
+           <input type="text" onChange={overlayTextHandler} />
+           <input type="color" defaultValue="#FFFFFF" onChange={overlayBackgroundHandler} />
+           <input type="number" min="0" max="250" onChange={overlayTextSizeHandler} />
+           <input type="number" min="0" max="100" onChange={overlayPaddingHandler} />
+           <input type="checkbox" onChange={backgroundExistenseHandler} />
+           <input type="color" defaultValue="000000" onChange={textColorHandler} />
         </div>
       </div>
     </div>
   );
 }
 
-export default ImageFormat;
+export default Overlay;
